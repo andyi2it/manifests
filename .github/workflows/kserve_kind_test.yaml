@@ -1,5 +1,6 @@
 name: Build & Apply KServe manifests in KinD
 on:
+  push:
   pull_request:
     paths:
       - contrib/kserve/**
@@ -27,11 +28,11 @@ jobs:
       - name: Install cert-manager
         run: ./tests/gh-actions/install_cert_manager.sh
 
-      - name: Install knative
-        run: ./tests/gh-actions/install_knative.sh
-
       - name: Build & Apply manifests
         run: ./tests/gh-actions/install_kserve.sh
+      
+      - name: Install knative
+        run: ./tests/gh-actions/install_knative.sh
 
       - name: Setup python 3.9
         uses: actions/setup-python@v4
