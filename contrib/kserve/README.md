@@ -80,13 +80,22 @@ For upgrading see [UPGRADE.md](UPGRADE.md)
 
 #### Steps
 
-1. Port forward
+1. Create test namespace
+   ```sh
+   kubectl create ns kserve-test 
+   ```
+2. Configure domain name
+   ```sh
+   kubectl patch cm config-domain --patch '{"data":{"example.com":""}}' -n knative-serving
+   ```
+
+3. Port forward
    ```sh
    # start a new terminal and run
    INGRESS_GATEWAY_SERVICE=$(kubectl get svc --namespace istio-system --selector="app=istio-ingressgateway" --output jsonpath='{.items[0].metadata.name}')
    kubectl port-forward --namespace istio-system svc/${INGRESS_GATEWAY_SERVICE} 8080:80
    ```
-2. Run test
+4. Run test
    ```sh
    export KSERVE_INGRESS_HOST_PORT='localhost:8080'
    make test-kserve

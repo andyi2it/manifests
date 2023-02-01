@@ -10,3 +10,4 @@ kubectl wait --for condition=established --timeout=30s crd/clusterservingruntime
 kustomize build kserve | kubectl apply -f -
 kustomize build models-web-app/overlays/kubeflow | kubectl apply -f -
 kubectl wait --for=condition=Ready pods --all --all-namespaces --timeout 180s
+kubectl patch cm config-domain --patch '{"data":{"example.com":""}}' -n knative-serving

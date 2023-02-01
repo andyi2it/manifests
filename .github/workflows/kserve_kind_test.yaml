@@ -36,6 +36,9 @@ jobs:
       - name: Build & Apply manifests
         run: ./tests/gh-actions/install_kserve.sh
 
+      - name: Create test namespace
+        run: kubectl create ns kserve-test
+
       - name: Setup python 3.9
         uses: actions/setup-python@v4
         with:
