@@ -1,5 +1,6 @@
 name: Build & Apply KServe manifests in KinD
 on:
+  push:
   pull_request:
     paths:
       - contrib/kserve/**
